@@ -23,6 +23,7 @@ import TextField from "@material-ui/core/TextField";
 import ControlledOpenSelect from "./listItems";
 import Chart from "./Chart";
 import Chart2 from "./Chart2";
+import Chart3 from "./Chart3";
 import { useSelector } from "react-redux";
 
 import Orders from "./Orders";
@@ -254,7 +255,7 @@ export default function Dashboard() {
             </Grid>
             <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper}>
-                <Chart nonVej={nonVej} Vej={Vej} fry={fry} />
+                <Chart3 nonVej={nonVej} Vej={Vej} fry={fry} />
               </Paper>
             </Grid>
             <Grid item xs={12}>

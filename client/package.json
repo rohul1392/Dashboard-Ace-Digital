@@ -19,7 +19,8 @@
     "react-scripts": "3.4.1",
     "recharts": "^2.1.13",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "victory": "^36.6.5"
   },
   "scripts": {
     "start": "react-scripts start",
