@@ -29,7 +29,6 @@ import Orders from "./Orders";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
 
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -119,8 +118,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const [loginOpen, setLoginOpen] = React.useState(false);
+  const [open, setOpen] = useState(true);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [error, setError] = useState(false);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [nonVej, setnonVej] = useState(0);
@@ -147,18 +147,24 @@ export default function Dashboard() {
     setUserInfo,
     Logout,
   } = useContext(AuthContext);
-  console.log("isLogedin", userInfo);
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   async function login() {
+    try {
     const user = { email, password };
-    console.log("login", user);
     const response = await axios.post("http://localhost:5000/login", user);
     if (response.status === 200) {
       updateLoginStatus(true);
       setUserInfo(response.data);
       setLoginOpen(false);
     }
+    else{
+      setError(true)
+    }
+  }
+  catch(err) {
+    setError(true)
+  }
   }
   const posts = useSelector((state) => state.posts.posts);
 
@@ -170,8 +176,6 @@ export default function Dashboard() {
     setnonVej(nonvegCount);
     setVej(vegCount);
     setFry(fryCount);
-
-    console.log("nonvegCount", nonvegCount, vegCount, fryCount);
   }, [posts]);
 
   return (
@@ -287,6 +291,7 @@ export default function Dashboard() {
               }}
             />
           </form>
+          {error && <Typography variant="p">Wrong credentials</Typography>}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleLoginClose} color="primary">

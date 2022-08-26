@@ -34,7 +34,6 @@ export default function ControlledOpenSelect() {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    console.log('handleChange',event.target.value)
     setType(event.target.value);
   };
 
