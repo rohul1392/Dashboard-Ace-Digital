@@ -9,11 +9,15 @@ export const login = async (req, res) => {
     try {
         const user = await Users.findOne({email: email});
         if (user) {
-            const currentUser = {
-                name: user.name,
-                email: user.email
+            if(password === user.password){
+                const currentUser = {
+                    name: user.name,
+                    email: user.email
+                }
+                res.send(currentUser);
+            }else{
+                res.status(205).send({message:"wrong credentials"})
             }
-            res.send(currentUser);
         }
         else {
             return res.status(401).send({message: 'Username/password is worng. Please check your credentials.'});
